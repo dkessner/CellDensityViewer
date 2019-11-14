@@ -46,6 +46,9 @@ class Model
 
     vector<vector<ofVec2f>> cellPositions;
     vector<vector<ofVec2f>> markerPositions;
+
+    void updatePositions(vector<ofVec2f>& positions, int count, 
+                         float rMin, float rMax);
 };
 
 

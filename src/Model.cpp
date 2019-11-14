@@ -34,39 +34,34 @@ void Model::initializeCompartmentPositions(shared_ptr<DataSlice> dataSlice)
         int cellCount = (int)dataSlice->prolifPopData.at(i) / 1000;
         if (cellCount < 0) cellCount = 0;
 
-        // add cell positions if necessary
+        updatePositions(currentCellPositions, cellCount, innerRadius, outerRadius);
 
-        for (int j=currentCellPositions.size(); j<cellCount; j++)
-        {
-            ofVec2f position(1, 0);
-            position.rotateRad(ofRandomuf() * 2 * PI);
-            position.scale(ofRandom(innerRadius, outerRadius));
-            currentCellPositions.push_back(position);
-        }
-
-        // remove cell positions if necessary
-
-        currentCellPositions.resize(cellCount);
-
-        // extracelluluar tumor marker
+        // marker (ET: extra-cellular, tumor compartments)
 
         vector<ofVec2f>& currentMarkerPositions = markerPositions.at(i);
         int markerCount = (int)dataSlice->markerETData.at(i);
 
-        // add marker positions if necessary
-
-        for (int j=currentMarkerPositions.size(); j<markerCount; j++)
-        {
-            ofVec2f position(1, 0);
-            position.rotateRad(ofRandomuf() * 2 * PI);
-            position.scale(ofRandom(innerRadius, outerRadius));
-            currentMarkerPositions.push_back(position);
-        }
-
-        // remove marker particles if necessary
-
-        currentMarkerPositions.resize(markerCount);
+        updatePositions(currentMarkerPositions, markerCount, innerRadius, outerRadius);
     }
+}
+
+
+void Model::updatePositions(vector<ofVec2f>& positions, int count, 
+                            float rMin, float rMax)
+{
+    // add positions if necessary
+
+    for (int j=positions.size(); j<count; j++)
+    {
+        ofVec2f position(1, 0);
+        position.rotateRad(ofRandomuf() * 2 * PI);
+        position.scale(ofRandom(rMin, rMax));
+        positions.push_back(position);
+    }
+
+    // remove positions if necessary
+
+    positions.resize(count);
 }
 
 

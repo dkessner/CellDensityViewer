@@ -55,10 +55,10 @@ void ofApp::timeStep(int step)
     timeIndex += step;
 
     if (timeIndex >= (int)data->size())
-        timeIndex = 0;
+        timeIndex = data->size()-1;
 
     if (timeIndex < 0)
-        timeIndex = data->size()-1;
+        timeIndex = 0;
 
     reinitializeModel();
 }
