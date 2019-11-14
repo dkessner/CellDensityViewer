@@ -20,11 +20,12 @@ void ofApp::setup()
 void ofApp::reinitializeModel()
 {
     shared_ptr<Model::DataSlice> dataSlice(
-            new Model::DataSlice(timeIndex, 
+            new Model::DataSlice(timeIndex,
                                  data->size(),
                                  Data::compartmentCount,
                                  data->getProlifPopData(timeIndex),
-                                 data->getMarkerETData(timeIndex)));
+                                 data->getMarkerETData(timeIndex),
+                                 data->getMarkerEPValue(timeIndex)));
 
     model->initializeCompartmentPositions(dataSlice);
 }

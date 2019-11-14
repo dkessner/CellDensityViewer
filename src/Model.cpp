@@ -43,6 +43,10 @@ void Model::initializeCompartmentPositions(shared_ptr<DataSlice> dataSlice)
 
         updatePositions(currentMarkerPositions, markerCount, innerRadius, outerRadius);
     }
+
+    // marker, extra-cellular, in plasma
+
+    updatePositions(markerPositionsPlasma, dataSlice->markerEPValue, 0, minRadius);
 }
 
 
@@ -75,6 +79,11 @@ void Model::drawText()
 
     float x = 50;
     float y = ofGetWindowHeight()-100;
+
+    ofSetColor(0, 0, 255);
+    ofDrawBitmapString(ofToString(dataSlice->markerEPValue), x, y + 50);
+
+    x += 100;
 
     for (int i=0; i<prolifPopData.size(); i++, x+=100)
     {
@@ -117,6 +126,12 @@ void Model::drawCompartments()
         for (auto position : compartmentMarkerPositions)
             ofDrawCircle(position.x, position.y, 1);
     }
+
+    // plasma
+
+    ofSetColor(0, 0, 255);
+    for (auto position : markerPositionsPlasma)
+        ofDrawCircle(position.x, position.y, 1);
 
     ofPopMatrix();
 }

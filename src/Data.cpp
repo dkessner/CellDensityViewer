@@ -28,6 +28,11 @@ const vector<float>& Data::getMarkerETData(int timeIndex) const
     return markerETData.at(timeIndex);
 }
 
+float Data::getMarkerEPValue(int timeIndex) const
+{
+    return markerEPData.at(timeIndex);
+}
+
 void Data::readDataMatrix(const string& filename, vector<vector<float>>& destination)
 {
     ofBuffer buffer = ofBufferFromFile(filename);

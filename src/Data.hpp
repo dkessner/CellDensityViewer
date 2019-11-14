@@ -19,6 +19,7 @@ class Data
 
     const vector<float>& getProlifPopData(int timeIndex) const;
     const vector<float>& getMarkerETData(int timeIndex) const;
+    float getMarkerEPValue(int timeIndex) const;
 
     private:
 
