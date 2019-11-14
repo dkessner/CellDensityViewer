@@ -78,14 +78,15 @@ void Model::drawText()
     auto markerETData = dataSlice->markerETData;
 
     float x = 50;
+    float xStep = ofGetWindowWidth()/12;
     float y = ofGetWindowHeight()-100;
 
     ofSetColor(0, 0, 255);
     ofDrawBitmapString(ofToString(dataSlice->markerEPValue), x, y + 50);
 
-    x += 100;
+    x += xStep;
 
-    for (int i=0; i<prolifPopData.size(); i++, x+=100)
+    for (int i=0; i<prolifPopData.size(); i++, x+=xStep)
     {
         ofSetColor(255);
         ofDrawBitmapString(ofToString(prolifPopData.at(i)), x, y);
