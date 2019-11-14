@@ -1,0 +1,55 @@
+As discussed, attached are some example matrices and vectors that our model
+would output:
+
+  1.  ProlifPop.txt proliferative cell population (counts matrix)
+  2.  NecroPop.txt necrotic cell population (counts matrix)
+  3.  MarkerMass_E_T.txt extracellular marker mass in tumor compartments
+  (concentration matrix; ng/mL)
+  4.  MarkerMass_E_P.txt extracellular marker mass in plasma (concentration
+  vector; ng/mL)
+  5.  MarkerMass_NE_T.txt non-extracellular marker mass in tumor compartments
+  (concentration matrix; ng/mL)
+  6.  MarkerMass_NE_P.txt non-extracellular marker mass in plasma
+  (concentration vector; ng/mL)
+
+Other clarifications:
+
+  *   In the matrices, each column is a compartment, or cylindrical region in
+      space dependent on radial distance to vasculature.
+  *   In the vectors, the column represents the plasma/vasculature "compartment".
+  *   Each row is a time point with unit of days elapsed since tumorigenesis.
+  *   We associate extracellular shedding with the proliferative population and
+      non-extracellular shedding with the necrotic population
+  *   for the discussed "tube"/zoomed in density cloud visualization: {1,3,4}
+      for extracellular markers or {2,5,6} for non-extracellular
+
+1) In the matrix files, what is the first column?  You mentioned time measured
+in days elapsed since tumorigenesis, but then why are the first columns
+different in different files (and why does ProlifPop start at 1)?
+
+2) Do you have a list of radial distances for the compartment boundaries?
+
+
+1. The first column is the first compartment. Time is not a column on that
+matrix because each row is a day. For a matrix M, entry M(1,5) is the 1st day
+5th compartment. M(1,1) = 1 for ProlifPop since it starts with one seeding
+tumor cell. TL;DR: the row index is the timestamp.
+
+
+2. The thickness of a compartment is 0.01 mm (10 µm). The distances to
+vasculature (in mm) for compartment i=1...n=10 are: 
+
+ 0.0050    0.0150    0.0250    0.0350    0.0450    0.0550    0.0650    0.0750    0.0850    0.0950
+
+
+Are you interpreting fractional cell counts as cell density then?  Do you have
+a distance/scale in the non-radial dimension (along the vasculature)?
+
+* Yes, fractional cell count is a sort of density measure
+
+* The distance/scale along the vasculature grows with the tumor (allocating more
+carrying capacity) via a vascularization function
+    - As of now, this function is linear with time (some small mm/day increase) 
+    - We hope to make this cell density-dependent in the future to mimic
+      angiogenic factors and vessel recruitment from growing tumors
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+(return 0 2>/dev/null) && sourced=1 || sourced=0
+
+if [ $sourced -eq 0 ]
+then
+    echo Usage: source setenv
+    exit 1
+fi
+
+export OF_ROOT=$(find ~/dev -maxdepth 1 -name of*)
+echo OF_ROOT: $OF_ROOT
+echo
+
+source ~/dev/emsdk/emsdk_env.sh
+
