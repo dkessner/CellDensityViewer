@@ -16,10 +16,10 @@ void Model::initializeCompartmentPositions(shared_ptr<DataSlice> dataSlice)
 {
     this->dataSlice = dataSlice;
     
-    if (cellPositions.size() != dataSlice->compartmentCount)
+    if (cellPositionsByCompartment.size() != dataSlice->compartmentCount)
     {
-        cellPositions.resize(dataSlice->compartmentCount);
-        markerPositions.resize(dataSlice->compartmentCount);
+        cellPositionsByCompartment.resize(dataSlice->compartmentCount);
+        markerPositionsByCompartment.resize(dataSlice->compartmentCount);
     }
 
     for (int i=0; i<dataSlice->compartmentCount; i++)
@@ -29,7 +29,7 @@ void Model::initializeCompartmentPositions(shared_ptr<DataSlice> dataSlice)
 
         // proliferative cells
 
-        vector<ofVec2f>& currentCellPositions = cellPositions.at(i);
+        vector<ofVec2f>& currentCellPositions = cellPositionsByCompartment.at(i);
 
         int cellCount = (int)dataSlice->prolifPopData.at(i) / 1000;
         if (cellCount < 0) cellCount = 0;
@@ -38,7 +38,7 @@ void Model::initializeCompartmentPositions(shared_ptr<DataSlice> dataSlice)
 
         // marker (ET: extra-cellular, tumor compartments)
 
-        vector<ofVec2f>& currentMarkerPositions = markerPositions.at(i);
+        vector<ofVec2f>& currentMarkerPositions = markerPositionsByCompartment.at(i);
         int markerCount = (int)dataSlice->markerETData.at(i);
 
         updatePositions(currentMarkerPositions, markerCount, innerRadius, outerRadius);
@@ -81,7 +81,7 @@ void Model::drawText()
         ofSetColor(255);
         ofDrawBitmapString(ofToString(prolifPopData.at(i)), x, y);
 
-        ofDrawBitmapString(ofToString(cellPositions.at(i).size()), x, y + 25);
+        ofDrawBitmapString(ofToString(cellPositionsByCompartment.at(i).size()), x, y + 25);
 
         ofSetColor(0, 0, 255);
         ofDrawBitmapString(ofToString(markerETData.at(i)), x, y + 50);
@@ -106,12 +106,12 @@ void Model::drawCompartments()
         ofDrawCircle(0, 0, radius); 
         ofFill();
 
-        const vector<ofVec2f>& compartmentCellPositions = cellPositions.at(i);
+        const vector<ofVec2f>& compartmentCellPositions = cellPositionsByCompartment.at(i);
 
         for (auto position : compartmentCellPositions)
             ofDrawCircle(position.x, position.y, 1);
 
-        const vector<ofVec2f>& compartmentMarkerPositions = markerPositions.at(i);
+        const vector<ofVec2f>& compartmentMarkerPositions = markerPositionsByCompartment.at(i);
 
         ofSetColor(0, 0, 255);
         for (auto position : compartmentMarkerPositions)

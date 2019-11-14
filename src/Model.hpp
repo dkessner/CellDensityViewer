@@ -44,8 +44,8 @@ class Model
 
     shared_ptr<DataSlice> dataSlice;
 
-    vector<vector<ofVec2f>> cellPositions;
-    vector<vector<ofVec2f>> markerPositions;
+    vector<vector<ofVec2f>> cellPositionsByCompartment;
+    vector<vector<ofVec2f>> markerPositionsByCompartment;
 
     void updatePositions(vector<ofVec2f>& positions, int count, 
                          float rMin, float rMax);
