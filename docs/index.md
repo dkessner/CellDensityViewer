@@ -1,4 +1,0 @@
-# CellDensityViewer
-
-[demo](CellDensityViewer.html)
-
