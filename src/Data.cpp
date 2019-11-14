@@ -8,8 +8,8 @@
 
 Data::Data()
 {
-    readData("ProlifPop.txt", prolifPopData);
-    readData("MarkerMass_E_T.txt", markerETData);
+    readDataMatrix("ProlifPop.txt", prolifPopData);
+    readDataMatrix("MarkerMass_E_T.txt", markerETData);
 }
 
 int Data::size() const
@@ -17,17 +17,17 @@ int Data::size() const
     return prolifPopData.size();
 }
 
-const vector<float>& Data::getProlifPopData(int i) const
+const vector<float>& Data::getProlifPopData(int timeIndex) const
 {
-    return prolifPopData.at(i);
+    return prolifPopData.at(timeIndex);
 }
 
-const vector<float>& Data::getMarkerETData(int i) const
+const vector<float>& Data::getMarkerETData(int timeIndex) const
 {
-    return markerETData.at(i);
+    return markerETData.at(timeIndex);
 }
 
-void Data::readData(const string& filename, vector<vector<float>>& destination)
+void Data::readDataMatrix(const string& filename, vector<vector<float>>& destination)
 {
     ofBuffer buffer = ofBufferFromFile(filename);
     cout << "[Data] Reading data from file: " << filename << endl;
@@ -61,7 +61,7 @@ void Data::readData(const string& filename, vector<vector<float>>& destination)
 }
 
 
-void Data::printData(const vector<vector<float>>& data)
+void Data::printDataMatrix(const vector<vector<float>>& data)
 {
     for (auto dataVector : data)
     {

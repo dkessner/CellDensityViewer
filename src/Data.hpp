@@ -17,16 +17,15 @@ class Data
 
     int size() const;
 
-    const vector<float>& getProlifPopData(int i) const;
-    const vector<float>& getMarkerETData(int i) const;
+    const vector<float>& getProlifPopData(int timeIndex) const;
+    const vector<float>& getMarkerETData(int timeIndex) const;
 
     private:
 
     vector<vector<float>> prolifPopData;
     vector<vector<float>> markerETData; // extra-cellular, tumor
 
-    void readData(const string& filename, vector<vector<float>>& destination);
-    void printData(const vector<vector<float>>& data);
-
+    void readDataMatrix(const string& filename, vector<vector<float>>& destination);
+    void printDataMatrix(const vector<vector<float>>& data);
 };
 
