@@ -24,8 +24,12 @@ class Data
 
     vector<vector<float>> prolifPopData;
     vector<vector<float>> markerETData; // extra-cellular, tumor
+    vector<float> markerEPData;         // extra-cellular, plasma
 
+    void readDataVector(const string& filename, vector<float>& destination);
     void readDataMatrix(const string& filename, vector<vector<float>>& destination);
-    void printDataMatrix(const vector<vector<float>>& data);
+
+    void print(const vector<float>& data);
+    void print(const vector<vector<float>>& data);
 };
 

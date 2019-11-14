@@ -10,6 +10,7 @@ Data::Data()
 {
     readDataMatrix("ProlifPop.txt", prolifPopData);
     readDataMatrix("MarkerMass_E_T.txt", markerETData);
+    readDataVector("MarkerMass_E_P.txt", markerEPData);
 }
 
 int Data::size() const
@@ -32,11 +33,8 @@ void Data::readDataMatrix(const string& filename, vector<vector<float>>& destina
     ofBuffer buffer = ofBufferFromFile(filename);
     cout << "[Data] Reading data from file: " << filename << endl;
 
-    int lineCount = 0;
     for (auto line : buffer.getLines())
     {
-        ++lineCount;
-
         destination.push_back(vector<float>());
         istringstream iss(line);
 
@@ -61,13 +59,32 @@ void Data::readDataMatrix(const string& filename, vector<vector<float>>& destina
 }
 
 
-void Data::printDataMatrix(const vector<vector<float>>& data)
+void Data::readDataVector(const string& filename, vector<float>& destination)
 {
-    for (auto dataVector : data)
+    ofBuffer buffer = ofBufferFromFile(filename);
+    cout << "[Data] Reading data from file: " << filename << endl;
+
+    for (auto line : buffer.getLines())
     {
-        copy(dataVector.begin(), dataVector.end(), ostream_iterator<float>(cout, " "));
-        cout << endl;
+        float value = ofToFloat(line);
+        destination.push_back(value);
     }
+
+    cout << destination.size() << " lines parsed.\n" << flush;
+}
+
+
+void Data::print(const vector<float>& dataVector)
+{
+    copy(dataVector.begin(), dataVector.end(), ostream_iterator<float>(cout, " "));
+    cout << endl;
+}
+
+
+void Data::print(const vector<vector<float>>& dataMatrix)
+{
+    for (auto dataVector : dataMatrix)
+        print(dataVector);
 }
 
 
