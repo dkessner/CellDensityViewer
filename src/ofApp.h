@@ -5,6 +5,7 @@
 
 #pragma once
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "Data.hpp"
 #include "Model.hpp"
 
@@ -43,4 +44,6 @@ class ofApp : public ofBaseApp
     bool mouseDownLeftSide = false;
 
     void reinitializeModel();
+
+    ofxFloatSlider timeIndexSlider;
 };

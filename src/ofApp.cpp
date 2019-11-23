@@ -14,6 +14,11 @@ void ofApp::setup()
 
     timeIndex = 0;
     reinitializeModel();
+
+    timeIndexSlider.setup("time index", timeIndex+1, 1, data->size());
+    timeIndexSlider.setShape(100, ofGetWindowHeight()-150, ofGetWindowWidth()-200, 25);
+    timeIndexSlider.setBorderColor(ofColor(0, 0, 255));
+    timeIndexSlider.setBackgroundColor(ofColor(50));
 }
 
 
@@ -39,6 +44,12 @@ void ofApp::update()
         rate *= mouseDownRightSide ? 1 : -1;
         timeStep(rate);
     }
+
+    if (timeIndex != timeIndexSlider-1)
+    {
+        timeIndex = timeIndexSlider-1;
+        reinitializeModel();
+    }
 }
 
 
@@ -48,6 +59,9 @@ void ofApp::draw()
 
     model->drawText();
     model->drawCompartments();
+
+    timeIndexSlider = (int)timeIndexSlider;
+    timeIndexSlider.draw();
 }
 
 
