@@ -75,6 +75,7 @@ void ofApp::timeStep(int step)
     if (timeIndex < 0)
         timeIndex = 0;
 
+    timeIndexSlider = timeIndex + 1;
     reinitializeModel();
 }
 
